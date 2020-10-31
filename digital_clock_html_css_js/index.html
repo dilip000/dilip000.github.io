@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Digital Clock Example in JS</title>
+    <link rel="stylesheet" href="css/style.css">
+   </head>
+   <body>
+       <div class="image-container">
+             <div class="text" id="clock">
+                    Time will display here on click of button...
+             </div>
+             <button class="button" id="change_format" onclick="format12();">Digital Clock in 12-Hour Format</button>
+             <button class="button" id="change_format24" onclick="format24();">Digital Clock in 24-Hour Format</button>
+
+            </div>
+            <script>
+                //Start with 24 hour format
+                function currentTime24Hour(){
+                    var date=new Date();//creating object of data class
+                    var hour = date.getHours();
+                    var min = date.getMinutes();
+                    var sec = date.getSeconds();
+                    hour = updateTime(hour);
+                    min = updateTime(min);
+                    sec = updateTime(sec);
+                    document.getElementById("clock").innerText = hour + " : " + min + " : " + sec;
+                    var t = setTimeout(function(){
+                             currentTime24Hour()
+                    },100000);
+                }
+                ///this function is used just for format the time
+                function updateTime(k){
+                    if(k < 10){
+                        return "0" + k;
+                    }
+                    else{
+                        return k;
+                    }
+                }
+                function format24(){
+                    document.getElementById("clock").innerText="";
+                    currentTime24Hour();
+                    }
+               ///start with 12 hour format
+               function currentTime12Hour()
+               {
+                var date=new Date();//creating object of data class
+                    var hour = date.getHours();
+                    var min = date.getMinutes();
+                    var sec = date.getSeconds();
+                    var midday = "AM";
+                    midday =(hour >= 12) ? "PM" : "AM";
+                    hour = (hour==0) ? 12 : ((hour>12) ? (hour-12):hour);
+                    //assign hour in 12 hour format
+                    hour = updateTime(hour);
+                    min = updateTime(min);
+                    sec = updateTime(sec);
+                    document.getElementById("clock").innerText = hour + " : " + min + " : " + sec + " "+midday;
+                    var t = setTimeout(function(){
+                             currentTime24Hour()
+                    },100000);
+
+               } 
+               function format12(){
+                    document.getElementById("clock").innerText="";
+                    currentTime12Hour();
+                }
+            /////////It's done ....thank you for watching    
+            </script>
+   </body>
+</html>
